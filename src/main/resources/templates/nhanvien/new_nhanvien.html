@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Nhân Viên</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Màu nền của body */
+        }
+
+        .container {
+            background-color: #fff; /* Màu nền của container */
+            padding: 20px; /* Khoảng cách nội dung với viền container */
+            border-radius: 5px; /* Bo tròn viền container */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Đổ bóng cho container */
+        }
+
+        h2 {
+            color: #007bff; /* Màu chữ của tiêu đề h2 */
+            margin-bottom: 20px; /* Khoảng cách dưới của tiêu đề h2 */
+        }
+
+        label {
+            font-weight: bold; /* Đậm chữ của nhãn label */
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%; /* Độ rộng của input và select là 100% */
+            padding: 8px; /* Khoảng cách giữa nội dung và viền của input và select */
+            margin-bottom: 10px; /* Khoảng cách dưới của input và select */
+            border: 1px solid #ced4da; /* Viền bao quanh input và select */
+            border-radius: 4px; /* Bo tròn viền input và select */
+            box-sizing: border-box; /* Kích thước tính cả phần padding và border */
+        }
+
+        select {
+            appearance: none; /* Ẩn kiểu chọn mặc định của select */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="rgba(0,0,0,0.5)" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Thêm mũi tên xuống cho select */
+            background-repeat: no-repeat;
+            background-position-x: 95%;
+            background-position-y: center;
+            padding-right: 30px; /* Khoảng cách phải để mũi tên select */
+        }
+
+        .btn-success, .btn-secondary {
+            margin-top: 10px; /* Khoảng cách trên của nút */
+            margin-right: 10px; /* Khoảng cách phải của nút */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-center">Thêm Nhân Viên</h2>
+    <form th:action="@{/nhanviens}" th:object="${nhanVien}" method="post">
+        <div class="form-group">
+            <label for="maNV">Mã Nhân Viên</label>
+            <input type="text" id="maNV" th:field="*{maNV}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="tenNV">Tên Nhân Viên</label>
+            <input type="text" id="tenNV" th:field="*{tenNV}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="phai">Giới Tính</label>
+            <select id="phai" th:field="*{phai}" class="form-control" required>
+                <option value="NAM">Nam</option>
+                <option value="NU">Nữ</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="noiSinh">Nơi Sinh</label>
+            <input type="text" id="noiSinh" th:field="*{noiSinh}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="phongBanId">Tên Phòng</label>
+            <select id="phongBanId" name="phongBanId" class="form-control" required>
+                <option th:each="phongBan : ${phongBans}" th:value="${phongBan.maPhong}" th:text="${phongBan.tenPhong}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="luong">Lương</label>
+            <input type="number" id="luong" th:field="*{luong}" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">Lưu</button>
+        <a href="/nhanviens" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+</body>
+</html>

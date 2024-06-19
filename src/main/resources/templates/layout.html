@@ -1,0 +1,95 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"-->
+<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Layout</title>-->
+<!--    <link rel="stylesheet"-->
+<!--          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">-->
+<!--    <style>-->
+<!--        .navbar {-->
+<!--                    background-color: #007bff; /* Màu nền của navbar */-->
+<!--                }-->
+
+<!--                .navbar-brand {-->
+<!--                    color: #fff; /* Màu chữ của navbar-brand */-->
+<!--                    font-weight: bold; /* Độ đậm của chữ */-->
+<!--                }-->
+
+<!--                .navbar-nav .nav-link {-->
+<!--                    color: #fff; /* Màu chữ của các liên kết trong navbar */-->
+<!--                }-->
+
+<!--                .navbar-nav .nav-link:hover {-->
+<!--                    color: #ccc; /* Màu chữ khi di chuột qua */-->
+<!--                }-->
+
+<!--                /* Phần chào hỏi và logout */-->
+<!--                .navbar-text {-->
+<!--                    color: #fff; /* Màu chữ của phần chào hỏi */-->
+<!--                    font-weight: bold; /* Độ đậm của chữ */-->
+<!--                    margin-right: 15px; /* Khoảng cách phía bên phải */-->
+<!--                }-->
+
+<!--                .btn-outline-light {-->
+<!--                    color: #fff; /* Màu chữ của button outline */-->
+<!--                    border-color: #fff; /* Màu viền của button outline */-->
+<!--                }-->
+
+<!--                .btn-outline-light:hover {-->
+<!--                    color: #007bff; /* Màu chữ khi di chuột qua */-->
+<!--                    background-color: #fff; /* Màu nền khi di chuột qua */-->
+<!--                }-->
+
+<!--                /* Nội dung cụ thể của từng trang */-->
+<!--                .container {-->
+<!--                    /* Thêm các tùy chỉnh khác tại đây nếu cần */-->
+<!--                }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav class="navbar navbar-expand-lg">-->
+<!--    <div class="container-fluid">-->
+<!--        <a class="navbar-brand" href="/products">Web Bán Hàng</a>-->
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"-->
+<!--                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"-->
+<!--                aria-expanded="false" aria-label="Toggle navigation">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link active" aria-current="page" href="/nhanviens">Nhân viên</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')">-->
+<!--                    <a th:href="@{/nhanviens/new}" class="nav-link">Thêm Nhân Viên</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">-->
+<!--                <li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()">-->
+<!--                    <span class="navbar-text">-->
+<!--                        Xin chào, <span sec:authentication="name"></span>-->
+<!--                    </span>-->
+<!--                </li>-->
+<!--                <li class="nav-item" sec:authorize="isAuthenticated()">-->
+<!--                    <form th:action="@{/logout}" method="post">-->
+<!--                        <button class="btn btn-outline-light" type="submit">Logout</button>-->
+<!--                    </form>-->
+<!--                </li>-->
+<!--                <li class="nav-item" sec:authorize="!isAuthenticated()">-->
+<!--                    <a class="btn btn-outline-light" href="/login">Login</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
+<!--<div class="container mt-5">-->
+<!--    <section layout:fragment="content">-->
+<!--    </section>-->
+<!--</div>-->
+<!--<script-->
+<!--        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->

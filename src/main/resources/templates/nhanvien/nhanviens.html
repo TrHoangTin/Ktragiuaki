@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+<head>
+    <title>Danh Sách Nhân Viên</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+             background-color: #f8f9fa; /* Màu nền của body */
+         }
+
+         .container {
+             background-color: #fff; /* Màu nền của container */
+             padding: 20px; /* Khoảng cách nội dung với viền container */
+             border-radius: 5px; /* Bo tròn viền container */
+             box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Đổ bóng cho container */
+         }
+
+         h2 {
+             color: #007bff; /* Màu chữ của tiêu đề h2 */
+             margin-bottom: 20px; /* Khoảng cách dưới của tiêu đề h2 */
+         }
+
+         label {
+             font-weight: bold; /* Đậm chữ của nhãn label */
+         }
+
+         input[type="text"], input[type="number"], select {
+             width: 100%; /* Độ rộng của input và select là 100% */
+             padding: 8px; /* Khoảng cách giữa nội dung và viền của input và select */
+             margin-bottom: 10px; /* Khoảng cách dưới của input và select */
+             border: 1px solid #ced4da; /* Viền bao quanh input và select */
+             border-radius: 4px; /* Bo tròn viền input và select */
+             box-sizing: border-box; /* Kích thước tính cả phần padding và border */
+         }
+
+         select {
+             appearance: none; /* Ẩn kiểu chọn mặc định của select */
+             -webkit-appearance: none;
+             -moz-appearance: none;
+             background-image: url('data:image/svg+xml;utf8,<svg fill="rgba(0,0,0,0.5)" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Thêm mũi tên xuống cho select */
+             background-repeat: no-repeat;
+             background-position-x: 95%;
+             background-position-y: center;
+             padding-right: 30px; /* Khoảng cách phải để mũi tên select */
+         }
+
+         .btn-success, .btn-secondary {
+             margin-top: 10px; /* Khoảng cách trên của nút */
+             margin-right: 10px; /* Khoảng cách phải của nút */
+         }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container mt-4">
+        <h2 class="text-center">Danh Sách Nhân Viên</h2>
+        <a href="/nhanviens/new" class="btn btn-primary mb-3" sec:authorize="hasAnyAuthority('ADMIN')">Thêm Nhân Viên</a>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Mã NV</th>
+                <th>Tên NV</th>
+                <th>Giới Tính</th>
+                <th>Nơi Sinh</th>
+                <th>Tên Phòng</th>
+                <th>Lương</th>
+                <th sec:authorize="hasAnyAuthority('ADMIN')">Hành Động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="nhanVien : ${nhanViens}">
+                <td th:text="${nhanVien.maNV}" style="color: black;"></td>
+                <td th:text="${nhanVien.tenNV}" style="color: black;"></td>
+                <td>
+                    <img th:src="${nhanVien.phai == 'NU' ? '/images/woman.png' : '/images/man.png'}" alt="Giới Tính" width="50" height="50">
+                </td>
+                <td th:text="${nhanVien.noiSinh}" style="color: black;"></td>
+                <td th:text="${nhanVien.phongBan != null ? nhanVien.phongBan.tenPhong : 'N/A'}" style="color: black;"></td>
+                <td th:text="${nhanVien.luong}" style="color: black;"></td>
+                <td sec:authorize="hasAnyAuthority('ADMIN')">
+                    <a th:href="@{/nhanviens/edit/{id}(id=${nhanVien.maNV})}" class="btn btn-warning btn-sm" >Sửa</a>
+                    <a th:href="@{/nhanviens/delete/{id}(id=${nhanVien.maNV})}" class="btn btn-danger btn-sm" >Xóa</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
